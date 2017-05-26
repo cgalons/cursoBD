@@ -9,11 +9,13 @@ namespace Database
         {
             
             Console.WriteLine("Conectando a la base de datos");
-            db database = new db();
-            database.Conectar();
+            //db database = new db();
+            //database.Conectar();
+            db.Conectar();
+           
 
 
-            if (database.EstaLaConexionAbierta())
+            if (db.EstaLaConexionAbierta())
             {
                 Usuario nuevoUsuario = new Usuario()
                 {
@@ -21,7 +23,7 @@ namespace Database
                     //id = "",
                     firstName = "MANOLO",
                     lastName = "EL DEL BOMBO",
-                    email = "kk7@kk.com",
+                    email = "kk8@kk.com",
                     password = "123456",
                     photoUrl = "",
                     searchPreferences = "",
@@ -29,19 +31,19 @@ namespace Database
                     deleted = false,
                     isAdmin = false,
                 };
-                database.InsertarUsuario(nuevoUsuario);
+                db.InsertarUsuario(nuevoUsuario);
                 Console.WriteLine("Usuario insertado, pulsa una tecla para continuar...");
                 Console.ReadKey();
 
                 nuevoUsuario.firstName += " modificado!!";
-                database.ActualizarUsuario(nuevoUsuario);
+                db.ActualizarUsuario(nuevoUsuario);
                 Console.WriteLine("Usuario actualizado, pulsa una tecla para continuar...");
                 Console.ReadKey();
 
-                database.EliminarUsuario("kk3@kk.com");
+                db.EliminarUsuario("kk3@kk.com");
                 Console.WriteLine("Usuario eliminado, pulsa una tecla para continuar...");
 
-                List<Usuario> listaUsuarios = database.DameLosUsuarios();
+                List<Usuario> listaUsuarios = db.DameLosUsuarios();
                 listaUsuarios.ForEach(usuario =>
                 {
                     Console.WriteLine(
@@ -71,8 +73,8 @@ namespace Database
                 });
             }
 
-            database.Desconectar();
-            database = null;
+            db.Desconectar();
+            //database = null;
             Console.ReadKey();
         }
 

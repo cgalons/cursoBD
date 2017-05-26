@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Database
 {
-    public class db
+    public static class db
     {
-        private SqlConnection conexion = null;
+        private static SqlConnection conexion = null;
 
-        public void Conectar()
+        public static void Conectar()
         {
 
 
@@ -85,7 +85,7 @@ namespace Database
 
         }
 
-        public bool EstaLaConexionAbierta()
+        public static bool EstaLaConexionAbierta()
         {
 
             return conexion.State == ConnectionState.Open;
@@ -94,21 +94,21 @@ namespace Database
 
 
 
-        public void Desconectar()
+        public static void Desconectar()
         {
 
-            if (this.conexion != null)
+            if (conexion != null)
             {
-                if (this.conexion.State != ConnectionState.Closed)
+                if (conexion.State != ConnectionState.Closed)
                 {
-                    this.conexion.Close();
+                    conexion.Close();
 
                 }
             }
             
         }
 
-        public List<Usuario> DameLosUsuarios()
+        public static List<Usuario> DameLosUsuarios()
         {
             List<Usuario> usuarios = null;
             //Preparo la consulta SQL para obtener los usuarios
@@ -155,7 +155,7 @@ namespace Database
             return usuarios;
         }
 
-        public void InsertarUsuario(Usuario usuario)
+        public static void InsertarUsuario(Usuario usuario)
         {
 
             //Preparo la consulta SQL para insertar los usuarios
@@ -196,12 +196,13 @@ namespace Database
             SqlCommand comando = new SqlCommand(consultaSQL, conexion);
 
             //Envío los datos
+
             comando.ExecuteNonQuery();
 
             
         }
 
-        public void EliminarUsuario (string email)
+        public static void EliminarUsuario (string email)
         {
             //Preparo la consulta SQL para eliminar los usuarios
             string consultaSQL = @"DELETE FROM Users WHERE email = '" + email + "';"; 
@@ -214,7 +215,7 @@ namespace Database
 
         }
 
-        public void ActualizarUsuario (Usuario usuario)
+        public static void ActualizarUsuario (Usuario usuario)
         {
             //Preparo la consulta SQL para actualizar los usuarios
 
