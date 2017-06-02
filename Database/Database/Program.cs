@@ -7,8 +7,8 @@ namespace Database
     {
         static void Main(string[] args)
         {
-            
-            Console.WriteLine("Conectando a la base de datos");
+
+            /*Console.WriteLine("Conectando a la base de datos");
             //db database = new db();
             //database.Conectar();
             db.Conectar();
@@ -75,11 +75,47 @@ namespace Database
 
             db.Desconectar();
             //database = null;
+            Console.ReadKey();*/
+
+            //Console.WriteLine("Conectando a la base de datos");
+            //db.Conectar();
+
+            //if (db.EstaLaConexionAbierta())
+            //{
+            //    List<Coche> listaCoches = db.DameListaCochesConProcedimientoAlmacenado();
+            //    listaCoches.ForEach(coche =>
+            //       {
+            //           Console.WriteLine(
+            //               @"Matricula: " + coche.matricula +
+            //               "Marca: " + coche.marca.denominacion +
+            //               "Tipo de combustible: " + coche.tipoCombustible.denominacion);
+            //       });
+            //}
+
+            //db.Desconectar();
+            //Console.ReadKey();
+
+            Console.WriteLine("Conectando a la base de datos");
+            db.Conectar();
+
+            if (db.EstaLaConexionAbierta())
+            {
+                List<Coche> listaCoches = db.DameListaCochesConProcedimientoAlmacenadoDos();
+                listaCoches.ForEach(coche =>
+                {
+                    Console.WriteLine(
+                      @"Marca: " + coche.marca.denominacion +
+                       "Matricula: " + coche.matricula +
+                       "Número de plazas: " + coche.nPlazas   );
+                });
+            }
+
+            db.Desconectar();
             Console.ReadKey();
         }
 
-           
 
-        }
+    }
+
 }
 
