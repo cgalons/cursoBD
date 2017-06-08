@@ -5,6 +5,7 @@
 
         $.get(urlAPI, function (respuesta, estado) {
 
+            debugger;
             console.log(respuesta);
             $('#resultados').html('');
             // COMPRUEBO EL ESTADO DE LA LLAMADA
@@ -12,8 +13,8 @@
                 // SI LLEGO HASTA AQUÍ QUIERE DECIR
 
                 var relleno = '';
-
-                $.each(respuesta.dataMarcas, function (indice, elemento) {
+                debugger;
+                $.each(respuesta.dataMarca, function (indice, elemento) {
 
                     relleno = '<ul>';
                     relleno += '    <li>';
@@ -31,29 +32,29 @@
         debugger;
         var nuevaMarca = $('#txtMarcaDenominacion').val();
         var urlAPI = 'http://localhost:63387/api/marcas';
+
         var dataNuevaMarca = {
             id: 0,
             denominacion: nuevaMarca
         };
         debugger;
+
         $.ajax({
             url: urlAPI,
             type: "POST",
             dataType: 'json',
             data: dataNuevaMarca,
-            success: function (data) {
+            success: function (respuesta) {
                 debugger;
-                console.log(data);
-            
+                console.log(respuesta);
+                GetMarcas();
+            },
+            error: function (respuesta) {
+                console.log(respuesta);
             }
         });
-        //$.post(urlAPI, data, function (result) {
-        //    debugger;
-        //    $("span").html(result);
-        //});
-
-
     });
 
     GetMarcas();
+
 });

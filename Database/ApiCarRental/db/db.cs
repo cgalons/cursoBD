@@ -164,7 +164,7 @@ namespace ApiCarRental
                 Marca marca = new Marca();
                 marca.id = (long)reader["id"];
                 marca.denominacion = reader["denominacion"].ToString();
-                
+
                 // AÑADO LA MARCA A LA LISTA DE RESULTADOS
                 resultados.Add(marca);
 
@@ -418,5 +418,21 @@ namespace ApiCarRental
             // EJECUTO EL COMANDO
             comando.ExecuteNonQuery();
         }
+
+        public static int AgregarMarca(Marca marca)
+        {
+            string procedimiento = "dbo.AgregarMarca";
+            SqlCommand comando = new SqlCommand(procedimiento, conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+            SqlParameter parametro = new SqlParameter();
+            parametro.ParameterName = "denominacion";
+            parametro.SqlDbType = SqlDbType.NVarChar;
+            parametro.SqlValue = marca.denominacion;
+            comando.Parameters.Add(parametro);
+            int filasAfectadas = comando.ExecuteNonQuery();
+
+            return filasAfectadas;
+        }
+
     }
 }

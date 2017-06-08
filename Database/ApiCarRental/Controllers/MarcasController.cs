@@ -74,14 +74,37 @@ namespace ApiCarRental.Controllers
 
         }
 
-
         // POST: api/Marca
         [HttpPost]
-        public IHttpActionResult Post([FromBody]Marca marca)
+        public IHttpActionResult Post([FromBody] Marca marca)
         {
+            RespuestaApi respuesta = new RespuestaApi();
+            respuesta.error = "";
+            int filasAfectadas = 0;
+            try
+            {
+                db.Conectar();
 
-               return Ok(marca); // OK elabora una respuesta devolviendo objeto recibido
+                if (db.EstaLaConexionAbierta())
+                {
+                    filasAfectadas = db.AgregarMarca(marca);
+
+                }
+
+                respuesta.totalElementos = filasAfectadas;
+
+                db.Desconectar();
+            }
+            catch 
+            {
+
+                respuesta.totalElementos = 0;
+                respuesta.error = "Error al agregar la marca";
+            }
+
+            return Ok(respuesta);
         }
+
 
         // PUT: api/Marca/5
         public void Put(int id, [FromBody]string value)
