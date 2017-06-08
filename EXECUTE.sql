@@ -1,0 +1,3 @@
+EXEC GET_COCHE_POR_MARCA_MATRICULA_PLAZAS_2
+	@marca = 'u'
+	,@nPlazas = 5

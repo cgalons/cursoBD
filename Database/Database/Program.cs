@@ -95,18 +95,36 @@ namespace Database
             //db.Desconectar();
             //Console.ReadKey();
 
+            //Console.WriteLine("Conectando a la base de datos");
+            //db.Conectar();
+
+            //if (db.EstaLaConexionAbierta())
+            //{
+            //    List<Coche> listaCoches = db.DameListaCochesConProcedimientoAlmacenadoDos();
+            //    listaCoches.ForEach(coche =>
+            //    {
+            //        Console.WriteLine(
+            //          @"Marca: " + coche.marca.denominacion +
+            //           " Matricula: " + coche.matricula +
+            //           " Número de plazas: " + coche.nPlazas   );
+            //    });
+            //}
+
+            //db.Desconectar();
+            //Console.ReadKey();
+
+
             Console.WriteLine("Conectando a la base de datos");
             db.Conectar();
 
             if (db.EstaLaConexionAbierta())
             {
-                List<Coche> listaCoches = db.DameListaCochesConProcedimientoAlmacenadoDos();
+                List<Coche> listaCoches = db.GET_COCHE_POR_MARCA_MATRICULA_PLAZAS_2("toyota", 4);
                 listaCoches.ForEach(coche =>
                 {
                     Console.WriteLine(
                       @"Marca: " + coche.marca.denominacion +
-                       "Matricula: " + coche.matricula +
-                       "Número de plazas: " + coche.nPlazas   );
+                       " Número de plazas: " + coche.nPlazas);
                 });
             }
 
