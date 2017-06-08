@@ -111,16 +111,19 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Views\addMarcas.html" />
+    <Content Include="Views\addTipoCombustible.html" />
     <Content Include="Views\css\mispelis.css" />
     <Content Include="Views\index.html" />
     <Content Include="Views\js\marcas.js" />
     <Content Include="Views\js\mispelis.js" />
+    <Content Include="Views\js\tipoCombustible.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CochesController.cs" />
     <Compile Include="Controllers\MarcasController.cs" />
+    <Compile Include="Controllers\TipoCombustibleController.cs" />
     <Compile Include="db\db.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -434,5 +434,51 @@ namespace ApiCarRental
             return filasAfectadas;
         }
 
+        public static int AgregarTipoCombustible(TipoCombustible tipocombustible)
+        {
+            string procedimiento = "dbo.AgregarTipoCombustible";
+            SqlCommand comando = new SqlCommand(procedimiento, conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+            SqlParameter parametro = new SqlParameter();
+            parametro.ParameterName = "denominacion";
+            parametro.SqlDbType = SqlDbType.NVarChar;
+            parametro.SqlValue = tipocombustible.denominacion;
+            comando.Parameters.Add(parametro);
+            int filasAfectadas = comando.ExecuteNonQuery();
+
+            return filasAfectadas;
+        }
+
+        public static List<TipoCombustible> DameListaTPConProcedimientoAlmacenado()
+        {
+            // CREO EL OBJETO EN EL QUE SE DEVOLVERÁN LOS RESULTADOS
+            List<TipoCombustible> resultados = new List<TipoCombustible>();
+
+            // PREPARO LA LLAMADA AL PROCEDIMIENTO ALMACENADO
+            string procedimientoAEjecutar = "dbo.GET_TIPO_COMBUSTIBLE";
+
+            // PREPARAMOS EL COMANDO PARA EJECUTAR EL PROCEDIMIENTO ALMACENADO
+            SqlCommand comando = new SqlCommand(procedimientoAEjecutar, conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+
+            // EJECUTO EL COMANDO Y RECOJO RESULTADOS CON EL READER
+            SqlDataReader reader = comando.ExecuteReader();
+
+            // RECORRO EL RESULTADO Y LO PASO A LA VARIABLE A DEVOLVER
+            while (reader.Read()) // EL READ LEE SI HAY UNA PRIMERA FILA, LA VUELCA Y VUELVE PARA SEGUIR CON LA SEGUNDA, ETC
+            {
+                // CREO LA MARCA
+                TipoCombustible tipoCombustible = new TipoCombustible();
+                tipoCombustible.id = (long)reader["id"];
+                tipoCombustible.denominacion = reader["denominacion"].ToString();
+
+                // AÑADO LA MARCA A LA LISTA DE RESULTADOS
+                resultados.Add(tipoCombustible);
+
+            }
+
+            return resultados;
+        }
+
     }
 }

@@ -15,5 +15,8 @@ namespace ApiCarRental
         public List<Coche> dataCoche { get; set; }
 
         public List<Marca> dataMarca { get; set; }
+
+        public List<TipoCombustible> dataTipoCombustible { get; set; }
+
     }
 }
